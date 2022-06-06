@@ -5,15 +5,17 @@ import express, {
   Response,
   Router,
 } from 'express';
-import { getProfiles } from './routes';
 import cors from 'cors';
 import morgan from 'morgan';
 import httpStatus from 'http-status';
+
+import { getProfiles } from './routes';
 import { NotFound } from './error';
 import { errorMiddleware } from './middleware';
 
 class App {
   public app: Application = express();
+
   public router: Router = Router();
 
   constructor() {

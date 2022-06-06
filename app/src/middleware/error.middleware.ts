@@ -1,7 +1,8 @@
 import httpStatus from 'http-status';
-import { ErrorRequest, HttpException, NotFound } from '../error';
 
-export const errorMiddleware: ErrorRequest = (err, req, res, next) => {
+import { ErrorRequest, HttpException } from '../error';
+
+export const errorMiddleware: ErrorRequest = (err, req, res) => {
   if (err instanceof HttpException) {
     return res.status(err.status).json({
       status: err.status,

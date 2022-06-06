@@ -1,6 +1,7 @@
 import express, { Application } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
+
 export { errorMiddleware } from './error.middleware';
 
 export function middlewareInit(app: Application) {

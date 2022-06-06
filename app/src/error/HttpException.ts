@@ -1,7 +1,7 @@
 import { config } from '../config';
 
 export class HttpException implements Error {
-  public name: string = 'HttpException';
+  public name = 'HttpException';
 
   constructor(
     public status: number,
