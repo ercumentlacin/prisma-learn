@@ -14,3 +14,27 @@ model Profile {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
   name String
 }
+
+model Post {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  slug     String    @unique
+  title    String
+  body     String
+  comments Comment[]
+  user     User      @relation(fields: [authorId], references: [id])
+  authorId String    @db.ObjectId
+}
+
+model Comment {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  post    Post   @relation(fields: [postId], references: [id])
+  postId  String @db.ObjectId
+  comment String
+}
+
+model User {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  email   String @unique
+  passwod String
+  posts   Post[]
+}

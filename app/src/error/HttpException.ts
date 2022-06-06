@@ -1,5 +1,3 @@
-import { config } from '../config';
-
 export class HttpException implements Error {
   public name = 'HttpException';
 
@@ -10,6 +8,6 @@ export class HttpException implements Error {
   ) {
     this.status = status;
     this.message = message;
-    this.stack = config.mode === 'development' ? new Error().stack : undefined;
+    this.stack = stack;
   }
 }

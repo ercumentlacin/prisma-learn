@@ -3,6 +3,7 @@ import httpStatus from 'http-status';
 
 import { prismaInstance } from '../utils/connectPrisma';
 import { ServerError } from '../error';
+import { UserController, UserServices } from '../user';
 
 export async function getProfiles(_req: Request, res: Response) {
   try {
@@ -12,3 +13,5 @@ export async function getProfiles(_req: Request, res: Response) {
     throw new ServerError();
   }
 }
+
+export const routes = [new UserController(new UserServices())];
