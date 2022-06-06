@@ -1,25 +1,15 @@
-import { PrismaClient } from '@prisma/client';
+import { app } from './app';
+import { connectPrisma } from './utils/connectPrisma';
 
-const prisma = new PrismaClient();
+const PORT = process.env.PORT || 4000;
 
-async function main() {
-  // Connect the client
-  await prisma.$connect();
-
-  await prisma.profile.create({
-    data: {
-      name: 'John Doe',
-    },
-  });
-
-  const allProfiles = await prisma.profile.findMany();
-  console.log('allProfiles :>> ', allProfiles);
-}
-
-main()
-  .catch((e) => {
-    throw e;
+connectPrisma()
+  .then(() => {
+    app.listen(process.env.PORT, () => {
+      console.log(`Server is running on port http://localhost:${PORT}`);
+    });
   })
-  .finally(async () => {
-    await prisma.$disconnect();
+  .catch((e) => {
+    console.log(e);
+    process.exit(1);
   });
