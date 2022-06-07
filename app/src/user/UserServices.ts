@@ -1,6 +1,7 @@
 import { User } from '@prisma/client';
 
 import { BadRequest } from '../error';
+import { getHashedPassword, generateAccessToken } from '../utils';
 import { prismaInstance } from '../utils/connectPrisma';
 
 export class UserServices {
@@ -16,14 +17,62 @@ export class UserServices {
       throw new BadRequest('User already exists');
     }
 
-    const user = await prismaInstance.user.create({ data: userData });
+    const hashedPassword = getHashedPassword(userData.password);
+
+    const user = await prismaInstance.user.create({
+      data: {
+        ...userData,
+        password: hashedPassword,
+      },
+    });
     return user;
   };
 
-  public getOneUser = async (email: string) => {
+  public getOneUser = async (id: string) => {
     const user = await prismaInstance.user.findUnique({
       where: {
-        email,
+        id,
+      },
+      select: {
+        email: true,
+        posts: true,
+      },
+    });
+
+    return user;
+  };
+
+  public login = async (userData: Pick<User, 'email' | 'password'>) => {
+    const user = await prismaInstance.user.findUnique({
+      where: {
+        email: userData.email,
+      },
+    });
+
+    if (!user) {
+      throw new BadRequest('User does not exist');
+    }
+
+    const isValid = user.password === getHashedPassword(userData.password);
+    if (!isValid) {
+      throw new BadRequest('Invalid password');
+    }
+
+    const token = generateAccessToken(user.id);
+
+    return {
+      token,
+      user: {
+        id: user.id,
+        email: user.email,
+      },
+    };
+  };
+
+  public getOneUserById = async (id: string) => {
+    const user = await prismaInstance.user.findUnique({
+      where: {
+        id,
       },
     });
 

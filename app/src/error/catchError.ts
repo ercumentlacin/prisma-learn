@@ -1,8 +1,13 @@
 import { GeneralError } from './GeneralError';
+import { HttpException } from './HttpException';
 
 export function catchError(error: unknown) {
-  if (error instanceof GeneralError) {
-    throw new GeneralError(error.status, error.message);
+  if (error instanceof HttpException) {
+    return error;
   }
-  throw new GeneralError(500, 'Internal Server Error');
+
+  if (error instanceof GeneralError) {
+    return new GeneralError(error.status, error.message);
+  }
+  return new GeneralError(500, 'Internal Server Error');
 }

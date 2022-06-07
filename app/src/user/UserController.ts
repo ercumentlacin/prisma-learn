@@ -18,8 +18,9 @@ export class UserController {
 
   initializeRoutes() {
     this.router.get('/all', this.getAllUsers);
-    this.router.get('/:email', this.getOneUser);
+    this.router.get('/:id', this.getOneUser);
     this.router.post('/create', signupMiddleware, this.createUser);
+    this.router.post('/login', signupMiddleware, this.loginUser);
   }
 
   getAllUsers: RequestHandler = async (req, res) => {
@@ -33,19 +34,29 @@ export class UserController {
 
   getOneUser: RequestHandler = async (req, res) => {
     try {
-      const data = await this.userServices.getOneUser(req.params.email);
+      const data = await this.userServices.getOneUser(req.params.id);
       res.status(httpStatus.OK).json({ data });
     } catch (error) {
       catchError(error);
     }
   };
 
-  createUser: RequestHandler = async (req, res) => {
+  createUser: RequestHandler = async (req, res, next) => {
     try {
       const data = await this.userServices.createUser(req.body);
       res.status(httpStatus.CREATED).json({ data });
     } catch (error) {
-      catchError(error);
+      next(catchError(error));
+    }
+  };
+
+  loginUser: RequestHandler = async (req, res, next) => {
+    try {
+      const data = await this.userServices.login(req.body);
+      res.status(httpStatus.OK).json({ data });
+    } catch (error) {
+      console.log('error :>> ', error);
+      next(catchError(error));
     }
   };
 }
