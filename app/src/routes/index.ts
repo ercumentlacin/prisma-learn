@@ -6,6 +6,8 @@ import { ServerError } from '../error';
 import { UserController, UserServices } from '../user';
 import { PostController, PostServices } from '../post';
 
+import { Controller } from '@/types';
+
 export async function getProfiles(_req: Request, res: Response) {
   try {
     const data = await prismaInstance.profile.findMany();
@@ -15,7 +17,7 @@ export async function getProfiles(_req: Request, res: Response) {
   }
 }
 
-export const routes = [
+export const routes: Controller[] = [
   new UserController(new UserServices()),
   new PostController(new PostServices()),
 ];

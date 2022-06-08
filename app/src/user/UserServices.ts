@@ -35,7 +35,15 @@ export class UserServices {
       },
       select: {
         email: true,
-        posts: true,
+        id: true,
+        posts: {
+          select: {
+            body: true,
+            title: true,
+            id: true,
+            slug: true,
+          },
+        },
       },
     });
 
