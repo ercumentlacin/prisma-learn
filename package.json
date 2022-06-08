@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "@prisma/client": "^3.14.0",
+    "@prisma/client": "^3.15.0",
     "@types/jsonwebtoken": "^8.5.8",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
@@ -13,14 +13,15 @@
     "http-status": "^1.5.2",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "slugify": "^1.6.5"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/joi": "^17.2.3",
     "@types/morgan": "^1.9.3",
-    "@types/node": "^17.0.40",
+    "@types/node": "^17.0.41",
     "@typescript-eslint/eslint-plugin": "^5.27.1",
     "@typescript-eslint/parser": "^5.27.1",
     "eslint": "^8.17.0",
@@ -33,15 +34,18 @@
     "prettier": "^2.6.2",
     "prisma": "^3.14.0",
     "ts-node": "^10.8.1",
+    "ts-node-dev": "^2.0.0",
+    "tsc-watch": "^5.0.3",
     "typescript": "^4.7.3"
   },
   "scripts": {
     "pri": "npm install @prisma/client",
-    "start": "ts-node app/src/index.ts",
+    "start": "ts-node --logError app/src/index.ts",
     "dev": "nodemon app/src/index.ts",
     "build": "tsc",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "start2": "tsc-watch --project . --outDir ./dist --onSuccess \"nodemon ./dist/bin/www.js\""
   },
   "keywords": [],
   "author": "",

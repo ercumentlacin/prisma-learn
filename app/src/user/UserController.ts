@@ -2,12 +2,13 @@ import { RequestHandler, Router } from 'express';
 import httpStatus from 'http-status';
 
 import { catchError } from '../error';
+import { Controller } from '../types';
 
 import { signupMiddleware } from './UserMiddlewares';
 
 import { UserServices } from './UserServices';
 
-export class UserController {
+export class UserController implements Controller {
   public path = 'user';
 
   public router: Router = Router();
