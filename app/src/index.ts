@@ -1,3 +1,5 @@
+// import 'module-alias/register';
+
 import { app } from './app';
 import { connectPrisma } from './utils/connectPrisma';
 

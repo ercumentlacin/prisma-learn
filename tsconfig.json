@@ -5,11 +5,6 @@
     "strict": true,
     "lib": ["esnext"],
     "esModuleInterop": true,
-    "typeRoots": ["node_modules/@types", "./types"],
-
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./app/src/*"]
-    }
+    "typeRoots": ["node_modules/@types", "./types"]
   }
 }

@@ -8,4 +8,11 @@ const postSchema = Joi.object<Post>().keys({
   body: Joi.string().required(),
 });
 
-export const createMiddleware = validateSchema(postSchema);
+export const createMiddlewareSchema = validateSchema(postSchema);
+
+const updatePostSchema = Joi.object<Post>().keys({
+  title: Joi.string(),
+  body: Joi.string(),
+});
+
+export const updatePostMiddlewareSchema = validateSchema(updatePostSchema);

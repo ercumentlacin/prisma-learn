@@ -4,6 +4,7 @@ import morgan from 'morgan';
 
 export { errorMiddleware } from './error.middleware';
 export { authMiddleware } from './authMiddleware';
+export { updatePostMiddleware } from './updatePostMiddleware';
 
 export function middlewareInit(app: Application) {
   app.use(express.json());

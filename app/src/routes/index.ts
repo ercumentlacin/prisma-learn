@@ -4,9 +4,8 @@ import httpStatus from 'http-status';
 import { prismaInstance } from '../utils/connectPrisma';
 import { ServerError } from '../error';
 import { UserController, UserServices } from '../user';
+import { Controller } from '../types';
 import { PostController, PostServices } from '../post';
-
-import { Controller } from '@/types';
 
 export async function getProfiles(_req: Request, res: Response) {
   try {

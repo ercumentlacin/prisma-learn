@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import { RequestHandler } from 'express';
 import httpStatus from 'http-status';
 
-import { IGetUserAuthInfoRequest } from '@/types';
+import { IGetUserAuthInfoRequest } from '../types';
 
 export const authMiddleware: RequestHandler = (
   req: IGetUserAuthInfoRequest,
