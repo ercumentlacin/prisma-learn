@@ -50,6 +50,7 @@
     "pri": "npm install @prisma/client",
     "start": "ts-node --logError app/src/index.ts",
     "dev": "nodemon app/src/index.ts",
+    "dev:debug": "nodemon --inspect app/src/index.ts",
     "build": "tsc",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

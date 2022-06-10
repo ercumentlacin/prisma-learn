@@ -6,5 +6,6 @@
     "lib": ["esnext"],
     "esModuleInterop": true,
     "typeRoots": ["node_modules/@types", "./types"]
-  }
+  },
+  "include": ["app/src/**/*"]
 }
